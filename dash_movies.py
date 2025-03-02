@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-plt.rcParams['font.family'] = 'Meiryo'
 
 # Load the pre-merged data
 movies = pd.read_csv("processed_movies.csv")
@@ -39,8 +38,8 @@ min_votes, max_votes = st.sidebar.slider(
 filtered_votes = movies[(movies["numVotes"] >= min_votes) & (movies["numVotes"] <= max_votes)]
 fig, ax = plt.subplots()
 ax.scatter(filtered_votes["numVotes"], filtered_votes["averageRating"], alpha=0.5)
-ax.set_xlabel("投票数")
-ax.set_ylabel("平均評価")
+ax.set_xlabel("Number of Votes")
+ax.set_ylabel("Average Rating")
 st.pyplot(fig)
 
 # Top Movies by Genre
@@ -76,7 +75,7 @@ genres_list = movies['genres'].str.split(',').explode().tolist()
 genre_counts = pd.DataFrame(Counter(genres_list).items(), columns=["genre", "count"]).sort_values(by="count", ascending=False)
 fig, ax = plt.subplots()
 sns.barplot(x="count", y="genre", data=genre_counts, ax=ax)
-ax.set_xlabel("映画数")
-ax.set_ylabel("ジャンル")
+ax.set_xlabel("Number of Movies")
+ax.set_ylabel("Genre")
 st.pyplot(fig)
 
